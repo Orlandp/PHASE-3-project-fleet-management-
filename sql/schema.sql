@@ -1,0 +1,12 @@
+PRAGMA foreign_keys = ON;
+CREATE TABLE IF NOT EXISTS vehicles (id INTEGER PRIMARY KEY, reg_no TEXT NOT NULL UNIQUE, make TEXT NOT NULL, capacity_tons REAL NOT NULL);
+CREATE TABLE IF NOT EXISTS drivers (id INTEGER PRIMARY KEY, name TEXT NOT NULL, phone TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS routes (id INTEGER PRIMARY KEY, origin TEXT NOT NULL, destination TEXT NOT NULL, distance_km REAL NOT NULL);
+CREATE TABLE IF NOT EXISTS trips (id INTEGER PRIMARY KEY, date TEXT NOT NULL, vehicle_id INTEGER NOT NULL, driver_id INTEGER NOT NULL, route_id INTEGER NOT NULL, cargo TEXT NOT NULL, distance_km REAL NOT NULL, revenue REAL NOT NULL, FOREIGN KEY (vehicle_id) REFERENCES vehicles(id) ON DELETE CASCADE, FOREIGN KEY (driver_id) REFERENCES drivers(id) ON DELETE CASCADE, FOREIGN KEY (route_id) REFERENCES routes(id) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS fuel_logs (id INTEGER PRIMARY KEY, date TEXT NOT NULL, vehicle_id INTEGER NOT NULL, liters REAL NOT NULL, unit_price REAL NOT NULL, odometer_km REAL NOT NULL, FOREIGN KEY (vehicle_id) REFERENCES vehicles(id) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS maintenance_logs (id INTEGER PRIMARY KEY, date TEXT NOT NULL, vehicle_id INTEGER NOT NULL, description TEXT NOT NULL, cost REAL NOT NULL, FOREIGN KEY (vehicle_id) REFERENCES vehicles(id) ON DELETE CASCADE);
+CREATE INDEX IF NOT EXISTS idx_trips_vehicle ON trips(vehicle_id);
+CREATE INDEX IF NOT EXISTS idx_trips_driver  ON trips(driver_id);
+CREATE INDEX IF NOT EXISTS idx_trips_route   ON trips(route_id);
+CREATE INDEX IF NOT EXISTS idx_fuel_vehicle  ON fuel_logs(vehicle_id);
+CREATE INDEX IF NOT EXISTS idx_maint_vehicle ON maintenance_logs(vehicle_id);
