@@ -85,6 +85,8 @@ The project is under a MIT License
 -Inspired by real-world fleet operations and reporting workflows
 -Built with tabulate (CLI) and SQL ALchemy. 
 
+## Link
+https://www.loom.com/share/eb647739ab32497e965205ec3378266f?sid=c796707f-dd04-448d-abca-fa73cb59bad9
 
 
 

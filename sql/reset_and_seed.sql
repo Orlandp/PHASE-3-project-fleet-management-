@@ -6,5 +6,7 @@ DROP TABLE IF EXISTS routes;
 DROP TABLE IF EXISTS drivers;
 DROP TABLE IF EXISTS vehicles;
 PRAGMA foreign_keys = ON;
-.read schema.sql
-.read seed.sql
+
+.read sql/schema.sql
+.read sql/seed.sql
+
